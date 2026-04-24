@@ -56,7 +56,7 @@ export function BackstageSection() {
   if (loading || items.length === 0) return null;
 
   return (
-    <section id="backstage" className="w-full mb-24 px-6 lg:px-12">
+    <section id="backstage" className="w-full">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -74,30 +74,18 @@ export function BackstageSection() {
             </div>
         </div>
 
-        {/* Collage Grid Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[150px] md:auto-rows-[200px] lg:auto-rows-[250px] gap-1 md:gap-2">
-            {items.map((item, index) => {
-                // Collage pattern logic
-                const p = index % 10;
-                let spanClasses = "col-span-1 row-span-1";
-                
-                if (p === 0) spanClasses = "col-span-2 row-span-2";
-                else if (p === 3) spanClasses = "col-span-1 row-span-2";
-                else if (p === 6) spanClasses = "col-span-2 row-span-1";
-                else if (p === 9) spanClasses = "col-span-2 row-span-2";
-
-                return (
+        {/* Masonry Gallery Section */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-2 md:gap-4 space-y-2 md:space-y-4">
+            {items.map((item, index) => (
                 <div 
                     key={item.id} 
-                    className={`relative w-full h-full overflow-hidden group/item cursor-pointer ${spanClasses}`}
+                    className="relative w-full overflow-hidden group/item cursor-pointer break-inside-avoid rounded-lg"
                     onClick={() => setSelectedImageIndex(index)}
                 >
-                    <Image
+                    <img
                         src={`${API_URL}/uploads/${item.image}`}
                         alt="Backstage"
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover/item:scale-110"
-                        unoptimized
+                        className="w-full h-auto block transition-transform duration-700 group-hover/item:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500"></div>
                     
@@ -105,7 +93,7 @@ export function BackstageSection() {
                          <Camera className="w-3 h-3 md:w-4 md:h-4" />
                     </div>
                 </div>
-            )})}
+            ))}
         </div>
       </div>
 

@@ -11,13 +11,6 @@ interface VideoModalProps {
 }
 
 export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps) {
-  const [origin, setOrigin] = useState('');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setOrigin(window.location.origin);
-    }
-  }, []);
 
   // Handle escape key
   useEffect(() => {
@@ -72,12 +65,11 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
           {youtubeId ? (
             <iframe
               className="w-full h-full"
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&origin=${encodeURIComponent(origin)}`}
+              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
               title={title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
             ></iframe>
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-gradient-to-b from-[#141414] to-black">

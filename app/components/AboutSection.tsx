@@ -2,7 +2,7 @@ import React from 'react';
 
 export function AboutSection() {
   return (
-    <section id="about-us" className="w-full mt-24 mb-10 px-6 lg:px-12 overflow-hidden">
+    <section id="about-us" className="w-full mt-6 mb-10 px-6 lg:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="relative p-8 md:p-12 rounded-[2rem] bg-gradient-to-br from-[#1f1f1f] to-[#141414] border border-white/5 shadow-2xl text-center">
           {/* Decorative Elements */}

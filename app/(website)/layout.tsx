@@ -3,7 +3,6 @@ import { fetchApi, API_URL } from '../lib/api';
 import { Sidebar } from '../components/Sidebar';
 import { Footer } from '../components/Footer';
 import { AboutSection } from '../components/AboutSection';
-import { BackstageSection } from '../components/BackstageSection';
 import { MobileHeader } from '../components/MobileHeader';
 
 
@@ -36,7 +35,6 @@ export default async function WebsiteLayout({
         </div>
 
         {/* Structured Sections */}
-        <BackstageSection />
         <AboutSection />
 
         {/* Clients Logo Grid */}

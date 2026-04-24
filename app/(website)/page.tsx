@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { fetchApi, API_URL } from '@/app/lib/api';
 import BannerSlider from '@/app/components/BannerSlider';
 import { ShowCard } from '@/app/components/ShowCard';
+import { BackstageSection } from '@/app/components/BackstageSection';
 
 interface Show {
   id: number;
@@ -61,6 +62,9 @@ export default async function Home() {
           )
         ))}
       </div>
+      {/* Backstage Section (Only on Home Page) */}
+      <div className='mt-12 w-full'><BackstageSection /></div>
+
     </div>
   );
 }
@@ -86,7 +90,7 @@ function MovieRow({ id, title, items }: { id: number, title: string, items: any[
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 md:gap-5">
         {displayedItems.map((item, index) => (
-          <div 
+          <div
             key={item.id}
             className={`
               ${index >= 9 ? 'hidden sm:block' : ''} 
