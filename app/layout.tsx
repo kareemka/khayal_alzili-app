@@ -10,13 +10,13 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title: {
-    default: 'خيال الظل - Khayal Al-Zili | منصة الإنتاج الفني الأولى',
+    default: 'خيال الظل - Khayal Al-Zili | شركة الإنتاج الفني الأولى',
     template: '%s | خيال الظل'
   },
   description: 'موقع خيال الظل للأفلام والمسلسلات الحصرية. نكرس جهودنا لصناعة محتوى درامي وسينمائي متميز يحاكي تطلعات المشاهد العربي. اكتشف أحدث إنتاجاتنا الفنية.',
   keywords: ['خيال الظل', 'مسلسلات عربية', 'أفلام حصرية', 'دراما', 'إنتاج فني', 'توزيع فني', 'سينما عربية'],
   authors: [{ name: 'خيال الظل' }],
-  metadataBase: new URL('https://khayal-alzili.com'),
+  metadataBase: new URL('https://shadowsilhouette.com'),
   openGraph: {
     title: 'خيال الظل - Khayal Al-Zili',
     description: 'منصتكم المفضلة لمشاهدة أحدث المسلسلات والأفلام الحصرية من إنتاج خيال الظل.',

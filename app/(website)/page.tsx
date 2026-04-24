@@ -66,15 +66,15 @@ export default async function Home() {
 }
 
 function MovieRow({ id, title, items }: { id: number, title: string, items: any[] }) {
-  // Show only last 9 items
-  const displayedItems = items.slice(0, 9);
+  // Show up to 18 items to support 6 columns * 3 rows on large screens
+  const displayedItems = items.slice(0, 18);
 
   return (
     <section className="w-full">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
           <div className="w-[4px] h-5 bg-[#d4af37] rounded-full shadow-[0_0_8px_#d4af37]"></div>
-          <h2 className="text-lg md:text-xl font-black text-white italic uppercase tracking-tighter">
+          <h2 className="text-lg md:text-xl font-black text-white uppercase tracking-tighter">
             {title}
           </h2>
         </div>
@@ -84,15 +84,23 @@ function MovieRow({ id, title, items }: { id: number, title: string, items: any[
         </Link>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-3 md:gap-5">
-        {displayedItems.map((item) => (
-          <ShowCard
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 md:gap-5">
+        {displayedItems.map((item, index) => (
+          <div 
             key={item.id}
-            id={item.id}
-            title={item.title}
-            image={item.image}
-            year={item.badge}
-          />
+            className={`
+              ${index >= 9 ? 'hidden sm:block' : ''} 
+              ${index >= 12 ? 'sm:hidden md:block' : ''} 
+              ${index >= 15 ? 'md:hidden lg:block' : ''}
+            `}
+          >
+            <ShowCard
+              id={item.id}
+              title={item.title}
+              image={item.image}
+              year={item.badge}
+            />
+          </div>
         ))}
       </div>
     </section>

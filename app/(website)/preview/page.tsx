@@ -11,7 +11,7 @@ interface Show {
   coverImage: string;
   thumbnailImage: string;
   youtubeTrailerLink: string;
-  promoLink: string;
+
   seoImage?: string;
   releaseYear: string;
   category?: { id: number; name: string };
@@ -43,7 +43,15 @@ export async function generateMetadata(
       openGraph: {
         title: show.title,
         description: show.description.slice(0, 160),
-        images: [shareImage, ...previousImages],
+        images: [
+          {
+            url: shareImage,
+            width: 1200,
+            height: 630,
+            alt: show.title,
+          },
+          ...previousImages,
+        ],
         type: 'video.movie',
       },
       twitter: {

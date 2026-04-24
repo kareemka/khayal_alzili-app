@@ -37,7 +37,7 @@ export default function CategoryClient({ category }: { category: Category }) {
           </button>
           <div>
             <span className="text-[#d4af37] text-xs font-black uppercase tracking-widest mb-1 block">تصفح الفئة</span>
-            <h1 className="text-3xl md:text-4xl font-black text-white italic uppercase tracking-tighter">
+            <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
               {category.name}
             </h1>
           </div>
@@ -52,7 +52,7 @@ export default function CategoryClient({ category }: { category: Category }) {
       {/* Grid */}
       {category.shows.length === 0 ? (
         <div className="py-24 text-center">
-          <p className="text-white/20 text-xl font-bold italic">لا توجد أعمال في هذا التصنيف حالياً</p>
+          <p className="text-white/20 text-xl font-bold">لا توجد أعمال في هذا التصنيف حالياً</p>
         </div>
       ) : (
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">

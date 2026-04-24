@@ -54,7 +54,7 @@ async function CategoryContent({ id }: { id?: string }) {
   if (!id) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-2xl font-bold mb-4 italic uppercase tracking-tighter">لم يتم تحديد تصنيف</h2>
+        <h2 className="text-2xl font-bold mb-4 uppercase tracking-tighter">لم يتم تحديد تصنيف</h2>
         <Link href="/" className="text-[#d4af37] hover:underline font-bold">العودة للرئيسية</Link>
       </div>
     );
@@ -65,7 +65,7 @@ async function CategoryContent({ id }: { id?: string }) {
     if (!category) {
       return (
         <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4 italic uppercase tracking-tighter">التصنيف غير موجود</h2>
+          <h2 className="text-2xl font-bold mb-4 uppercase tracking-tighter">التصنيف غير موجود</h2>
           <Link href="/" className="text-[#d4af37] hover:underline font-bold">العودة للرئيسية</Link>
         </div>
       );
@@ -75,7 +75,7 @@ async function CategoryContent({ id }: { id?: string }) {
   } catch (err) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-2xl font-bold mb-4 italic uppercase tracking-tighter">حدث خطأ أثناء التحميل</h2>
+        <h2 className="text-2xl font-bold mb-4 uppercase tracking-tighter">حدث خطأ أثناء التحميل</h2>
         <Link href="/" className="text-[#d4af37] hover:underline font-bold">العودة للرئيسية</Link>
       </div>
     );

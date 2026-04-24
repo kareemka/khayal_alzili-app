@@ -1,4 +1,4 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.shadowsilhouette.com';
 
 export async function fetchApi(endpoint: string, options: RequestInit = {}) {
   const url = `${API_URL}${endpoint}`;
@@ -7,8 +7,8 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
     headers: {
       'Content-Type': 'application/json',
     },
-    // Adding reasonable caching for server side fetching
-    next: { revalidate: 60 } 
+    // Disable caching completely to ensure fresh data and working videos
+    cache: 'no-store'
   };
 
   const finalOptions = {

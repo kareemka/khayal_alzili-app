@@ -3,8 +3,12 @@ import { fetchApi, API_URL } from '../lib/api';
 import { Sidebar } from '../components/Sidebar';
 import { Footer } from '../components/Footer';
 import { AboutSection } from '../components/AboutSection';
+import { BackstageSection } from '../components/BackstageSection';
+import { MobileHeader } from '../components/MobileHeader';
 
 
+
+export const dynamic = 'force-dynamic';
 
 export default async function WebsiteLayout({
   children,
@@ -24,9 +28,7 @@ export default async function WebsiteLayout({
       {/* Main Content Area */}
       <main className="flex-1 lg:mr-[240px] w-full lg:max-w-[calc(100vw-240px)] relative flex flex-col">
         {/* Mobile Header */}
-        <div className="lg:hidden flex justify-start items-center p-5 bg-[#141414]/80 backdrop-blur-md sticky top-0 z-[100] border-b border-white/5">
-          <Image src="/logo.png" alt="Khayal Al-Zili" width={100} height={40} className="object-contain h-auto" priority />
-        </div>
+        <MobileHeader />
 
         {/* Page Content */}
         <div className="flex-1">
@@ -34,6 +36,7 @@ export default async function WebsiteLayout({
         </div>
 
         {/* Structured Sections */}
+        <BackstageSection />
         <AboutSection />
 
         {/* Clients Logo Grid */}
@@ -42,8 +45,7 @@ export default async function WebsiteLayout({
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
-                   <h3 className="text-primary/60 text-[10px] font-black tracking-[0.4em] uppercase">Success Partners</h3>
-                   <h2 className="text-3xl md:text-4xl font-black text-white italic uppercase tracking-tighter">شركاء النجاح</h2>
+                   <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">شركاء النجاح</h2>
                    <div className="h-1.5 w-16 bg-primary rounded-full shadow-[0_0_10px_#d4af37]"></div>
                 </div>
 

@@ -150,11 +150,11 @@ export default function BannerSlider({ banners }: BannerSliderProps) {
 
               {/* Centered slide content overlay */}
               {index === current && (
-                <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-10 lg:p-14" dir="rtl">
+                <div className="absolute inset-0 flex flex-col justify-end px-3 pb-8 pt-3 md:p-10 lg:p-14" dir="rtl">
                   <div className="flex items-center justify-between w-full">
                     
                     {/* Right: Title */}
-                    <h2 className="text-sm md:text-3xl lg:text-5xl font-bold text-white drop-shadow-md tracking-tight line-clamp-1 max-w-[60%]">
+                    <h2 className="text-sm md:text-3xl lg:text-5xl font-bold text-white drop-shadow-md tracking-tight truncate max-w-[60%] py-1 leading-normal">
                       {banner.title}
                     </h2>
 

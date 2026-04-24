@@ -10,12 +10,12 @@ import { Play, Calendar, Tag, ChevronLeft, Info, Film } from 'lucide-react';
 
 interface Show {
   id: number;
-  title: string;  
+  title: string;
   description: string;
   coverImage: string;
   thumbnailImage: string;
   youtubeTrailerLink: string;
-  promoLink: string;
+
   seoImage?: string;
   releaseYear: string;
   category?: { id: number; name: string };
@@ -23,7 +23,7 @@ interface Show {
 
 export default function PreviewClient({ show }: { show: Show }) {
   const router = useRouter();
-  const [activeModal, setActiveModal] = useState<'trailer' | 'promo' | null>(null);
+  const [activeModal, setActiveModal] = useState<'trailer' | null>(null);
 
   return (
     <div className="min-h-screen text-white selection:bg-primary selection:text-black overflow-x-hidden" dir="rtl">
@@ -78,11 +78,11 @@ export default function PreviewClient({ show }: { show: Show }) {
               {/* Info & Buttons */}
               <div className="flex-1 space-y-6 text-center md:text-right w-full">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                  <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 mb-2">
                     <span className="px-3 py-1 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">{show.category?.name || 'Drama'}</span>
                     <span className="flex items-center gap-1 text-white/50 text-xs font-bold"><Calendar className="w-3.5 h-3.5" /> {show.releaseYear || '2026'}</span>
                   </div>
-                  <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white italic uppercase tracking-tighter drop-shadow-2xl text-center md:text-right">{show.title}</h1>
+                  <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase tracking-tighter drop-shadow-2xl text-center md:text-right">{show.title}</h1>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
@@ -94,7 +94,7 @@ export default function PreviewClient({ show }: { show: Show }) {
                     <Play className="w-4 h-4 fill-current" />
                     مشاهدة الإعلان الترويجي
                   </button>
-                 
+
                 </div>
               </div>
             </div>
@@ -103,61 +103,30 @@ export default function PreviewClient({ show }: { show: Show }) {
 
         {/* Details & Promo Section */}
         <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mt-16 space-y-16">
-          
+
           {/* Overview */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
-                 <div className="w-1.5 h-8 bg-primary rounded-full"></div>
-                 <h2 className="text-2xl font-black text-white italic uppercase tracking-tighter">نظرة عامة </h2>
+                <div className="w-1.5 h-8 bg-primary rounded-full"></div>
+                <h2 className="text-2xl font-black text-white uppercase tracking-tighter">نظرة عامة </h2>
               </div>
               <p className="text-lg text-white/60 leading-relaxed font-medium text-right whitespace-pre-wrap">{show.description}</p>
             </div>
           </div>
 
-          {show.promoLink && (
-            <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-white/10 p-10 md:p-16 text-center group">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-               
-               <div className="relative z-10 space-y-6 md:space-y-8 flex flex-col items-center">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                    <Film className="w-8 h-8 md:w-10 md:h-10" />
-                  </div>
-                  
-                  <div className="space-y-2 md:space-y-3">
-                    <h2 className="text-2xl md:text-5xl font-black text-white tracking-tighter italic">جاهز للمشاهدة؟</h2>
-                    <p className="text-white/40 text-sm md:text-lg max-w-xl mx-auto font-medium">اكتشف ملامح العمل وتفاصيله الحصرية من خلال العرض الترويجي.</p>
-                  </div>
-
-                  <Link
-                    href={`/player?url=${encodeURIComponent(show.promoLink)}&title=${encodeURIComponent(`برومو: ${show.title}`)}`}
-                    className="flex items-center gap-3 md:gap-4 bg-white text-black px-8 py-3.5 md:px-12 md:py-5 rounded-xl md:rounded-2xl font-black text-base md:text-xl transition-all shadow-2xl hover:scale-105 active:scale-95 group/btn"
-                  >
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black text-white flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-black transition-colors">
-                      <Play className="w-4 h-4 fill-current" />
-                    </div>
-                    عرض الفيديو الآن
-                  </Link>
-               </div>
-            </div>
-          )}
         </div>
       </div>
 
       {/* Reusable Video Modals */}
-      <VideoModal 
-        isOpen={activeModal === 'trailer'} 
+      <VideoModal
+        isOpen={activeModal === 'trailer'}
         onClose={() => setActiveModal(null)}
-        title={`إعلان: ${show.title}`}
+        title={show.title}
         videoUrl={show.youtubeTrailerLink}
       />
 
-      <VideoModal 
-        isOpen={activeModal === 'promo'} 
-        onClose={() => setActiveModal(null)}
-        title={`برومو العمل: ${show.title}`}
-        videoUrl={show.promoLink}
-      />
+
     </div>
   );
 }

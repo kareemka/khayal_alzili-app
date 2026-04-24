@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { X } from 'lucide-react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -18,6 +19,17 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
     }
   }, []);
 
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   function getYouTubeId(url: string) {
@@ -30,32 +42,37 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
   const youtubeId = getYouTubeId(videoUrl);
 
   return (
-    <div className="fixed inset-0 z-[300] bg-black/95 backdrop-blur-md animate-in fade-in duration-500 flex flex-col justify-center items-center px-4">
-      <div className="w-full max-w-6xl relative animate-in zoom-in-95 duration-500">
+    <div className="fixed inset-0 z-[300] bg-black/90 backdrop-blur-xl animate-in fade-in duration-700 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12">
+      
+      {/* Cinematic Glow Behind Video */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#d4af37]/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+      {/* Floating Close Button */}
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 lg:top-10 lg:right-10 z-[310] group flex items-center gap-3 bg-black/40 hover:bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 md:p-4 rounded-full transition-all duration-300 hover:scale-105"
+      >
+        <span className="hidden md:block text-xs font-black uppercase tracking-widest text-white/70 group-hover:text-white">إغلاق</span>
+        <X className="w-5 h-5 text-white/70 group-hover:text-white" strokeWidth={2.5} />
+      </button>
+
+      <div className="w-full max-w-[1200px] relative animate-in zoom-in-95 slide-in-from-bottom-10 duration-700 delay-100 fill-mode-both flex flex-col items-center">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-             <div className="w-1 h-6 bg-primary rounded-full shadow-[0_0_10px_#d4af37]"></div>
-             <h3 className="text-xl md:text-2xl font-black text-white italic tracking-tighter uppercase">{title}</h3>
-          </div>
-          <button
-            onClick={onClose}
-            className="group flex items-center gap-2 text-white/50 hover:text-white transition-colors"
-          >
-            <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Close</span>
-            <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </div>
-          </button>
+        <div className="w-full flex items-center justify-center mb-6 md:mb-8">
+           <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md border border-white/5 px-6 py-3 rounded-2xl shadow-xl">
+             <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
+             <h3 className="text-lg md:text-2xl font-black text-white tracking-tighter uppercase truncate max-w-[200px] sm:max-w-md md:max-w-2xl">{title}</h3>
+             <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
+           </div>
         </div>
 
         {/* Video Player Container */}
-        <div className="w-full aspect-video rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl bg-black border border-white/5 relative group">
+        <div className="w-full aspect-video rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] bg-[#0a0a0a] border border-white/10 relative group ring-1 ring-white/5">
           {youtubeId ? (
             <iframe
               className="w-full h-full"
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&origin=${encodeURIComponent(origin)}`}
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&origin=${encodeURIComponent(origin)}`}
               title={title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -63,21 +80,14 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
               referrerPolicy="strict-origin-when-cross-origin"
             ></iframe>
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-gradient-to-b from-[#141414] to-black">
+              <div className="w-24 h-24 rounded-full bg-red-500/5 border border-red-500/20 flex items-center justify-center text-red-500 mb-6 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
+                <X className="w-10 h-10" />
               </div>
-              <p className="text-xl font-bold text-white mb-2">رابط الفيديو غير متوفر</p>
-              <p className="text-white/40 text-sm max-w-xs">عذراً، لا يمكننا تشغيل هذا المحتوى حالياً. يرجى المحاولة مرة أخرى لاحقاً.</p>
+              <p className="text-2xl font-black text-white mb-3">رابط الفيديو غير صالح</p>
+              <p className="text-white/40 text-sm max-w-sm leading-relaxed">تأكد من إدخال رابط يوتيوب صحيح من لوحة التحكم لتتمكن من مشاهدة الفيديو الترويجي هنا.</p>
             </div>
           )}
-        </div>
-        
-        {/* Footer info */}
-        <div className="mt-8 flex items-center justify-center gap-6 opacity-30 grayscale pointer-events-none">
-           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/20"></div>
-           <span className="text-[10px] font-black uppercase tracking-[0.5em] text-white">Khayal Al-Zili Premium Player</span>
-           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/20"></div>
         </div>
       </div>
     </div>

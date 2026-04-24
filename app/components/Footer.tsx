@@ -12,14 +12,16 @@ export function Footer({ settings }: FooterProps) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand & Logo */}
         <div className="space-y-4">
-          <Image src="/logo.png" alt="Khayal Al-Zili" width={120} height={45} className="object-contain h-auto" />
+          <Link href="/">
+            <Image src="/logo.png" alt="Khayal Al-Zili" width={120} height={45} className="object-contain h-auto" />
+          </Link>
           <p className="text-white/40 text-sm leading-relaxed max-w-xs font-bold">
             شركة خيال الظل للتوزيع والانتاج الفني
           </p>
         </div>
 
         {/* Quick Links or Contact */}
-        <div className="space-y-4">
+        <div id="contact-us" className="space-y-4">
           <h3 className="text-white font-black text-lg">تواصل معنا</h3>
           {settings?.storeEmail && (
             <div className="flex items-center gap-3 text-white/60 hover:text-primary transition-colors group">
@@ -32,7 +34,7 @@ export function Footer({ settings }: FooterProps) {
         {/* Social Media */}
         <div className="space-y-4">
           <h3 className="text-white font-black text-lg">تابعنا على</h3>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             {settings?.facebook && (
               <Link href={settings.facebook} target="_blank" className="p-2.5 rounded-xl bg-white/5 text-white/40 hover:text-primary hover:bg-primary/10 transition-all border border-white/5 shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
@@ -53,12 +55,22 @@ export function Footer({ settings }: FooterProps) {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
               </Link>
             )}
+            {settings?.youtube && (
+              <Link href={settings.youtube} target="_blank" className="p-2.5 rounded-xl bg-white/5 text-white/40 hover:text-primary hover:bg-primary/10 transition-all border border-white/5 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+              </Link>
+            )}
+            {settings?.tiktok && (
+              <Link href={settings.tiktok} target="_blank" className="p-2.5 rounded-xl bg-white/5 text-white/40 hover:text-primary hover:bg-primary/10 transition-all border border-white/5 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+              </Link>
+            )}
           </div>
         </div>
       </div>
 
       <div className="mt-12 pt-8 border-t border-white/5 text-center">
-        <p className="text-white/20 text-[12px] font-bold italic tracking-wider">
+        <p className="text-white/20 text-[12px] font-bold tracking-wider">
           © {new Date().getFullYear()} خيال الظل. جميع الحقوق محفوظة. تم التطوير بكل إبداع.
         </p>
       </div>
