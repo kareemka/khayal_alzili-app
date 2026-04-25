@@ -11,7 +11,6 @@ interface VideoModalProps {
 }
 
 export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps) {
-  const [play, setPlay] = useState(false);
 
   // Handle escape key
   useEffect(() => {
@@ -26,12 +25,7 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Reset play state when modal closes
-  useEffect(() => {
-    if (!isOpen) {
-      setPlay(false);
-    }
-  }, [isOpen]);
+
 
   if (!isOpen) return null;
 
@@ -66,32 +60,19 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
         <div className="w-full aspect-video rounded-xl overflow-hidden bg-black relative">
 
           {youtubeId ? (
-            !play ? (
-              // ▶️ شاشة البداية (زر تشغيل)
-              <div
-                onClick={() => setPlay(true)}
-                className="w-full h-full flex flex-col items-center justify-center cursor-pointer bg-black"
-              >
-                <div className="text-white text-lg mb-3">▶ تشغيل الفيديو</div>
-                <div className="text-white/50 text-sm">
-                  اضغط لتشغيل الفيديو
-                </div>
-              </div>
-            ) : (
-              // 🎬 iframe بعد الضغط
-              <iframe
-                className="w-full h-full"
-                src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
-                title={title}
-                frameBorder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            )
+            <iframe
+              key={youtubeId}
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&mute=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+              title={title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           ) : (
-            // ❌ رابط غير صالح
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+              <X className="w-12 h-12 text-red-500 mb-6" />
               <p className="text-white text-xl mb-3">رابط الفيديو غير صالح</p>
             </div>
           )}
