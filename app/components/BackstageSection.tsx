@@ -89,11 +89,11 @@ export function BackstageSection() {
                 alt="Backstage"
                 className="w-full h-auto block transition-transform duration-700 group-hover/item:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 transition-opacity duration-500 group-hover/item:from-black/80"></div>
 
               {item.title && (
-                <div className="absolute bottom-4 left-4 right-12 text-right opacity-0 group-hover/item:opacity-100 transition-opacity duration-500">
-                  <p className="text-white font-bold text-sm md:text-base line-clamp-2">{item.title}</p>
+                <div className="absolute bottom-4 left-4 right-[50px] text-right opacity-100 transition-opacity duration-500">
+                  <p className="text-white font-bold text-sm md:text-base line-clamp-2 drop-shadow-md">{item.title}</p>
                 </div>
               )}
 
