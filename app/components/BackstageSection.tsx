@@ -56,10 +56,10 @@ export function BackstageSection() {
   if (loading || items.length === 0) return null;
 
   return (
-    <section id="backstage" className="w-full">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <section id="backstage" className="w-full" dir="rtl">
+      <div className="max-w-7xl mx-auto space-y-8 px-4 lg:px-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-start gap-8">
             <div className="flex items-center gap-3">
                 <div className="w-1.5 h-8 bg-primary rounded-full shadow-[0_0_15px_#d4af37]"></div>
                 <div className="space-y-1">

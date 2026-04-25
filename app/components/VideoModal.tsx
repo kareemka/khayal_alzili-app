@@ -36,7 +36,7 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
 
   return (
     <div className="fixed inset-0 z-[300] bg-black/90 backdrop-blur-xl animate-in fade-in duration-700 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12">
-      
+
       {/* Cinematic Glow Behind Video */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#d4af37]/10 blur-[150px] rounded-full pointer-events-none"></div>
 
@@ -50,14 +50,14 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
       </button>
 
       <div className="w-full max-w-[1200px] relative animate-in zoom-in-95 slide-in-from-bottom-10 duration-700 delay-100 fill-mode-both flex flex-col items-center">
-        
+
         {/* Header */}
         <div className="w-full flex items-center justify-center mb-6 md:mb-8">
-           <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md border border-white/5 px-6 py-3 rounded-2xl shadow-xl">
-             <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
-             <h3 className="text-lg md:text-2xl font-black text-white tracking-tighter uppercase truncate max-w-[200px] sm:max-w-md md:max-w-2xl">{title}</h3>
-             <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
-           </div>
+          <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md border border-white/5 px-6 py-3 rounded-2xl shadow-xl">
+            <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
+            <h3 className="text-lg md:text-2xl font-black text-white tracking-tighter uppercase truncate max-w-[200px] sm:max-w-md md:max-w-2xl">{title}</h3>
+            <div className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_10px_#d4af37]"></div>
+          </div>
         </div>
 
         {/* Video Player Container */}
@@ -65,12 +65,20 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
           {youtubeId ? (
             <iframe
               className="w-full h-full"
-              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
               title={title}
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+            />
+            // <iframe
+            //   className="w-full h-full"
+            //   src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+            //   title={title}
+            //   frameBorder="0"
+            //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            //   allowFullScreen
+            // ></iframe>
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-gradient-to-b from-[#141414] to-black">
               <div className="w-24 h-24 rounded-full bg-red-500/5 border border-red-500/20 flex items-center justify-center text-red-500 mb-6 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
