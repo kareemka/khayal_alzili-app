@@ -59,21 +59,16 @@ export function BackstageSection() {
 
   return (
     <section id="backstage" className="w-full" dir="rtl">
-      <div className="max-w-7xl ml-auto space-y-8 px-4 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-8 px-4 lg:px-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-center text-center space-y-2">
           <div className="flex items-center gap-3">
-            <div className="w-1.5 h-8 bg-primary rounded-full shadow-[0_0_15px_#d4af37]"></div>
-            <div className="space-y-1">
-              <h2 className="text-3xl font-black text-white uppercase tracking-tighter">كواليس</h2>
-              <p className="text-white/30 text-xs font-bold uppercase tracking-widest">ما وراء خيال الظل</p>
-            </div>
+            <Camera className="text-white/20 w-6 h-6" />
+            <h2 className="text-3xl font-black text-white uppercase tracking-tighter">كواليس</h2>
+            <Camera className="text-white/20 w-6 h-6" />
           </div>
-
-          <div className="hidden md:flex items-center gap-2">
-            <div className="h-px w-24 bg-gradient-to-l from-white/10 to-transparent"></div>
-            <Camera className="text-white/20 w-5 h-5" />
-          </div>
+          <p className="text-white/30 text-xs font-bold uppercase tracking-widest">ما وراء خيال الظل</p>
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-white/10 to-transparent mt-4"></div>
         </div>
 
         {/* Masonry Gallery Section */}
