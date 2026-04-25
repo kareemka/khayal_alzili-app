@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { fetchApi, API_URL } from '../lib/api';
+import Link from 'next/link';
 import { Camera, ChevronRight, ChevronLeft, X, Maximize, Download } from 'lucide-react';
 
 interface BackstageItem {
   id: number;
   image: string;
+  title?: string;
 }
 
 export function BackstageSection() {
@@ -18,8 +20,8 @@ export function BackstageSection() {
   useEffect(() => {
     const loadItems = async () => {
       try {
-        const data = await fetchApi('/backstage');
-        setItems(data || []);
+        const data = await fetchApi('/backstage?page=1&limit=12');
+        setItems(data.data || []);
       } catch (error) {
         console.error('Failed to load backstage items');
       } finally {
@@ -87,13 +89,27 @@ export function BackstageSection() {
                 alt="Backstage"
                 className="w-full h-auto block transition-transform duration-700 group-hover/item:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500"></div>
+
+              {item.title && (
+                <div className="absolute bottom-4 left-4 right-12 text-right opacity-0 group-hover/item:opacity-100 transition-opacity duration-500">
+                  <p className="text-white font-bold text-sm md:text-base line-clamp-2">{item.title}</p>
+                </div>
+              )}
 
               <div className="absolute bottom-2 right-2 p-1.5 bg-black/40 backdrop-blur-md rounded-full border border-white/10 text-white/60 opacity-0 group-hover/item:opacity-100 transition-all duration-500 translate-y-4 group-hover/item:translate-y-0 md:bottom-4 md:right-4 md:p-2">
                 <Camera className="w-3 h-3 md:w-4 md:h-4" />
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="flex justify-center mt-8">
+          <Link href="/backstage" className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white font-bold transition-all flex items-center gap-2 group">
+             عرض كل الكواليس
+             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
 
@@ -163,6 +179,11 @@ export function BackstageSection() {
                 unoptimized
                 priority
               />
+              {items[selectedImageIndex].title && (
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent flex justify-center text-center">
+                  <p className="text-white text-lg md:text-2xl font-bold">{items[selectedImageIndex].title}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
