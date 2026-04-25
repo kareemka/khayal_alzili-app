@@ -82,7 +82,7 @@ export default function PreviewClient({ show }: { show: Show }) {
                     <span className="px-3 py-1 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">{show.category?.name || 'Drama'}</span>
                     <span className="flex items-center gap-1 text-white/50 text-xs font-bold"><Calendar className="w-3.5 h-3.5" /> {show.releaseYear || '2026'}</span>
                   </div>
-                  <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase tracking-tighter drop-shadow-2xl text-center md:text-right">{show.title}</h1>
+                  <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white uppercase tracking-tighter drop-shadow-2xl text-center md:text-right">{show.title}</h1>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
