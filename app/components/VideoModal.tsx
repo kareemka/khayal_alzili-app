@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { X } from 'lucide-react';
 
 interface VideoModalProps {
@@ -12,7 +12,7 @@ interface VideoModalProps {
 
 export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps) {
 
-  // Handle escape key
+  // ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -25,15 +25,28 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-
-
   if (!isOpen) return null;
 
   function getYouTubeId(url: string) {
     if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
+
+    try {
+      const u = new URL(url);
+
+      if (u.searchParams.get('v')) return u.searchParams.get('v');
+
+      if (u.hostname.includes('youtu.be')) {
+        return u.pathname.slice(1);
+      }
+
+      if (u.pathname.includes('/embed/')) {
+        return u.pathname.split('/embed/')[1];
+      }
+
+      return null;
+    } catch {
+      return null;
+    }
   }
 
   const youtubeId = getYouTubeId(videoUrl);
@@ -56,17 +69,16 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
           {title}
         </h3>
 
-        {/* Video Container */}
+        {/* Video */}
         <div className="w-full aspect-video rounded-xl overflow-hidden bg-black relative">
 
           {youtubeId ? (
             <iframe
-              key={youtubeId}
               className="w-full h-full"
-              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&mute=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+              src={`https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
               title={title}
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
@@ -76,10 +88,11 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
               <p className="text-white text-xl mb-3">رابط الفيديو غير صالح</p>
             </div>
           )}
+
         </div>
 
-        {/* 🔗 fallback فتح في يوتيوب */}
-        {youtubeId && (
+        {/* Open in YouTube */}
+        {/* {youtubeId && (
           <a
             href={`https://www.youtube.com/watch?v=${youtubeId}`}
             target="_blank"
@@ -87,7 +100,7 @@ export function VideoModal({ isOpen, onClose, title, videoUrl }: VideoModalProps
           >
             فتح الفيديو في يوتيوب
           </a>
-        )}
+        )} */}
 
       </div>
     </div>
