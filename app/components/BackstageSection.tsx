@@ -61,14 +61,34 @@ export function BackstageSection() {
     <section id="backstage" className="w-full" dir="rtl">
       <div className="max-w-7xl mx-auto space-y-8 px-4 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col items-center justify-center text-center space-y-2">
-          <div className="flex items-center gap-3">
-            <Camera className="text-white/20 w-6 h-6" />
-            <h2 className="text-3xl font-black text-white uppercase tracking-tighter">كواليس</h2>
-            <Camera className="text-white/20 w-6 h-6" />
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br from-[#1a1a1a] via-[#141414] to-[#111]">
+          {/* Glow */}
+          <div className="absolute -top-20 right-1/4 w-60 h-60 bg-[#d4af37]/[0.04] rounded-full blur-[100px] pointer-events-none"></div>
+          {/* Dot pattern */}
+          <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+
+          <div className="relative z-10 flex flex-col items-center justify-center text-center py-10 md:py-12 px-6 space-y-4">
+            {/* Camera icon row */}
+            <div className="flex items-center gap-4">
+              <div className="h-px w-10 md:w-16 bg-gradient-to-r from-transparent to-[#d4af37]/20"></div>
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06]">
+                <Camera className="text-[#d4af37]/50 w-5 h-5" />
+              </div>
+              <div className="h-px w-10 md:w-16 bg-gradient-to-l from-transparent to-[#d4af37]/20"></div>
+            </div>
+
+            {/* Title */}
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">كواليس</h2>
+
+            {/* Subtitle */}
+            <p className="text-white/30 text-xs md:text-sm font-semibold tracking-widest">ما وراء خيال الظل</p>
+
+            {/* Gold accent line */}
+            <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent"></div>
           </div>
-          <p className="text-white/30 text-xs font-bold uppercase tracking-widest">ما وراء خيال الظل</p>
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-white/10 to-transparent mt-4"></div>
+
+          {/* Bottom border glow */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/15 to-transparent"></div>
         </div>
 
         {/* Masonry Gallery Section */}

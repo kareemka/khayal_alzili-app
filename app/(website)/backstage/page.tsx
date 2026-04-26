@@ -69,7 +69,7 @@ export default function BackstagePage() {
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (observerTarget.current) observer.observe(observerTarget.current);
-    
+
     return () => {
       if (observerTarget.current) observer.unobserve(observerTarget.current);
     };
@@ -116,7 +116,7 @@ export default function BackstagePage() {
               </div>
             </div>
           </div>
-          
+
           <div className="hidden md:flex items-center gap-2">
             <div className="h-px w-32 bg-gradient-to-l from-white/10 to-transparent"></div>
             <Camera className="text-white/20 w-6 h-6" />
@@ -191,7 +191,7 @@ export default function BackstagePage() {
                 <Download className="w-6 h-6" />
               </a>
             </div>
-            
+
             <button
               onClick={() => setSelectedImageIndex(null)}
               className="text-white/70 hover:text-white transition-colors p-2"
